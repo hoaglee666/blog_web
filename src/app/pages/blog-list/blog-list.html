@@ -1,0 +1,74 @@
+<div class="blog-list-container">
+  <div class="page-header">
+    <h1>All blog posts</h1>
+    <p>Discover articles about web development, Angular, and more</p>
+  </div>
+
+  <!-- search/filter -->
+  <div class="filters-section">
+    <div class="search-box">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search blogs..."
+        [value]="searchTerm"
+        (input)="onSearchChange($event)"
+        aria-label="Search blogs"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="tags-filter">
+      <span class="filter-label">Filter by tag:</span>
+      <div class="tags-lists">
+        <button
+          *ngFor="let tag of allTags"
+          class="tag-filter"
+          [class.active]="selectedTag === tag"
+          (click)="filterByTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      </div>
+      <button *ngIf="searchTerm || selectedTag" class="clear-filters" (click)="clearFilter()">
+        Clear filters
+      </button>
+    </div>
+  </div>
+  <!--loading -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <div>...Loading</div>
+  </div>
+  <!-- result -->
+  <div *ngIf="!isLoading" class="results-count">
+    <p>Showing {{ filteredBlogs.length }} blog{{ filteredBlogs.length !== 1 ? 's' : '' }}</p>
+  </div>
+  <!-- blog list -->
+  <div *ngIf="!isLoading && filteredBlogs.length > 0" class="blogs-grid">
+    <article *ngFor="let blog of filteredBlogs" class="blog-card" (click)="navigateToBlog(blog.id)">
+      <div class="blog-image">
+        <img [src]="blog.imageUrl" [alt]="blog.title" />
+      </div>
+      <div class="blog-content">
+        <div class="blog-tags">
+          <span *ngFor="let tag of blog.tags" class="tag">{{ tag }}</span>
+        </div>
+        <h2 class="blog-title">{{ blog.title }}</h2>
+        <p class="blog-excerpt">{{ blog.excerpt }}</p>
+        <div class="blog-meta">
+          <span class="author">✍️ {{ blog.author }}</span>
+          <span class="date">📅 {{ blog.createdAt | date : 'MMM d, yyyy' }}</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- no results -->
+  <div *ngIf="!isLoading && filteredBlogs.length === 0" class="no-results">
+    <div class="no-results-icon">📭</div>
+    <h3>No blogs found</h3>
+    <p>Try adjusting your search or filters</p>
+    <button class="btn btn-primary" (click)="clearFilter()">Clear filters</button>
+  </div>
+</div>

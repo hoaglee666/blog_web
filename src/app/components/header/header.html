@@ -1,0 +1,42 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="nav-container">
+      <a routerLink="/home" class="logo">
+        <span class="logo-icon">📝</span>
+        <span class="logo-text">Angular Blog</span>
+      </a>
+      <button
+        class="menu-toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="isMenuOpen"
+        aria-label="Toggle navigation menu"
+      >
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu" [class.active]="isMenuOpen">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" (click)="closeMenu()" class="nav-link"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a routerLink="/blogs" routerLinkActive="active" (click)="closeMenu()" class="nav-link"
+            >Blogs</a
+          >
+        </li>
+        <li class="nav-item">
+          <a routerLink="/create" routerLinkActive="active" (click)="closeMenu()" class="nav-link"
+            >Write</a
+          >
+        </li>
+        <li class="nav-item">
+          <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()" class="nav-link"
+            >About</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

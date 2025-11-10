@@ -1,0 +1,84 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Welcome to Angular Blog</h1>
+      <p class="hero-subtitle">
+        Explore insightful articles about web development, Angular, TypeScript, and modern web
+        technologies
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" (click)="navigateToAllBlogs()">Explore blogs</button>
+        <button class="btn btn-secondary" routerLink="/create">Write a blog</button>
+      </div>
+    </div>
+  </section>
+  <!-- feature Blogs Section -->
+  <section class="featured-section">
+    <div class="section-header">
+      <h2>Featured Articles</h2>
+      <p>Check out our latest and most popular blogs</p>
+    </div>
+    <!--Loading state-->
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading blogs...</p>
+    </div>
+    <!-- blogs cards -->
+    <div *ngIf="!isLoading" class="blog-grid">
+      <article
+        *ngFor="let blog of featuredBlogs"
+        class="blog-card"
+        (click)="navigateToBlog(blog.id)"
+      >
+        <div class="blog-image">
+          <img [src]="blog.imageUrl" [alt]="blog.title" />
+          <div class="blog-overlay">
+            <span class="read-more">Read more -></span>
+          </div>
+        </div>
+        <div class="blog-content">
+          <div class="blog-tags">
+            <span *ngFor="let tag of blog.tags" class="tag">{{ tag }}</span>
+          </div>
+          <h3 class="blog-title">{{ blog.title }}</h3>
+          <p class="blog-excerpt">{{ blog.excerpt }}</p>
+          <div class="blog-meta">
+            <span class="author">By {{ blog.author }}</span>
+            <span class="date">{{ blog.createdAt | date : 'MMM d, yyyy' }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div *ngIf="!isLoading" class="view-all">
+      <button class="btn btn-outline" (click)="navigateToAllBlogs()">View all blogs</button>
+    </div>
+  </section>
+
+  <!-- features -->
+  <section class="features-section">
+    <h2>Why Angular Blog?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast & Efficient</h3>
+        <p>Built with Angular's powerful features including lazy loading for optimal performance</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Responsive Design</h3>
+        <p>Fully responsive layout that works seamlessly on all devices and screen sizes</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Modern UI</h3>
+        <p>Clean and intuitive interface with smooth animations and transitions</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>SEO Friendly</h3>
+        <p>Built with semantic HTML and accessibility best practices in mind</p>
+      </div>
+    </div>
+  </section>
+</div>
