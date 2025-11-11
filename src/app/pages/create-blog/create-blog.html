@@ -1,1 +1,140 @@
-<p>create-blog works!</p>
+<div class="create-blog-container">
+  <div class="form-wrapper">
+    <div class="form-header">
+      <h1>Create a new blog</h1>
+      <p>Share your knowledge with the community</p>
+    </div>
+    <!--success-->
+    <div *ngIf="submitSuccess" class="success-message">
+      ✅ Blog created successfully! Redirecting...
+    </div>
+    <!--blog form-->
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="blog-form">
+      <!--title-->
+      <div class="form-group">
+        <label for="title" class="form-label"> Title * </label>
+        <input
+          type="text"
+          id="Title"
+          formControlName="title"
+          class="form-input"
+          [class.error]="isFieldInvalid('title')"
+          placeholder="Enter a title..."
+        />
+        <span *ngIf="isFieldInvalid('title')" class="error-message">
+          {{ getErrorMessage('title') }}
+        </span>
+      </div>
+      <!--author-->
+      <div class="form-group">
+        <label for="author" class="form-label"> Author * </label>
+        <input
+          type="text"
+          id="author"
+          formControlName="author"
+          class="form-input"
+          [class.error]="isFieldInvalid('author')"
+          placeholder="Your name..."
+        />
+        <span *ngIf="isFieldInvalid('author')" class="error-message">{{
+          getErrorMessage('author')
+        }}</span>
+      </div>
+      <!--excerpt-->
+      <div class="form-group">
+        <label for="excerpt" class="form-label"> Excerpt * </label>
+        <textarea
+          id="excerpt"
+          formControlName="excerpt"
+          class="form-textarea"
+          [class.error]="isFieldInvalid('excerpt')"
+          rows="3"
+          placeholder="Write a brief summary of your blog post..."
+        ></textarea>
+        <span *ngIf="isFieldInvalid('excerpt')" class="error-message">
+          {{ getErrorMessage('excerpt') }}
+        </span>
+      </div>
+      <!--content-->
+      <div class="form-group">
+        <label for="content" class="form-label"> Content * </label>
+        <textarea
+          id="content"
+          formControlName="content"
+          class="form-textarea large"
+          [class.error]="isFieldInvalid('content')"
+          rows="10"
+          placeholder="Write your blog content here..."
+        ></textarea>
+        <span *ngIf="isFieldInvalid('content')" class="error-message">
+          {{ getErrorMessage('content') }}
+        </span>
+      </div>
+      <!--image-->
+      <div class="form-group">
+        <label for="imageUrl" class="form-label"> Featured Image URL * </label>
+        <input
+          type="url"
+          id="imageUrl"
+          formControlName="imageUrl"
+          class="form-input"
+          [class.error]="isFieldInvalid('imageUrl')"
+          placeholder="https://example.com/image.jpg"
+        />
+        <span *ngIf="isFieldInvalid('imageUrl')" class="error-message">
+          {{ getErrorMessage('imageUrl') }}
+        </span>
+        <!-- Image Preview -->
+        <div *ngIf="blogForm.get('imageUrl')?.valid" class="image-preview">
+          <img [src]="blogForm.get('imageUrl')?.value" alt="Preview" />
+        </div>
+      </div>
+      <!--tags-->
+      <div class="form-group">
+        <label class="form-label">
+          Tags *
+          <span class="hint">(Select at least one)</span>
+        </label>
+        <div class="tags-grid">
+          <label
+            *ngFor="let tag of availableTags"
+            class="tag-checkbox"
+            [class.selected]="isTagSelected(tag)"
+          >
+            <input
+              type="checkbox"
+              [checked]="isTagSelected(tag)"
+              (change)="onTagChange($event, tag)"
+            />
+            <span>{{ tag }}</span>
+          </label>
+        </div>
+        <span *ngIf="isFieldInvalid('tags')" class="error-message">
+          Please select at least one tag
+        </span>
+      </div>
+      <!--form actions-->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="resetForm()"
+          [disabled]="isSubmitting"
+        >
+          Reset
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || blogForm.invalid">
+          <span *ngIf="!isSubmitting">Publish Blog</span>
+          <span *ngIf="isSubmitting">Publishing...</span>
+        </button>
+      </div>
+      <!--form status-->
+      <div class="form-status">
+        <p *ngIf="blogForm.invalid && blogForm.dirty" class="status-warning">
+          ⚠️ Please fix the errors above before submitting
+        </p>
+        <p *ngIf="blogForm.valid" class="status-success">✓ Form is valid and ready to submit</p>
+      </div>
+    </form>
+  </div>
+</div>

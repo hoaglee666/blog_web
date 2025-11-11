@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BlogService, Blog } from '../../services/blog';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-blog-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, FormsModule],
+  standalone: true,
   templateUrl: './blog-list.html',
   styleUrl: './blog-list.css',
 })

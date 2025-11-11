@@ -1,1 +1,56 @@
-<p>about works!</p>
+<div class="about-container">
+  <section class="about-hero">
+    <div class="hero-content">
+      <h1>About Angular blog</h1>
+      <p class="hero-subtitle">
+        A modern, responsive blog application showcasing Angular best practices
+      </p>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <div class="content-wrapper">
+      <h2>Our mission</h2>
+      <p>
+        Angular Blog is a demonstration project created to showcase modern web development practices
+        using Angular framework. This application demonstrates key concepts including
+        component-based architecture, reactive forms, HTTP client usage, routing with lazy loading,
+        and responsive design principles.
+      </p>
+      <p>
+        The goal is to provide a hands-on example of building a real-world application that follows
+        industry best practices and demonstrates the power of Angular for creating dynamic,
+        performant web applications.
+      </p>
+    </div>
+  </section>
+  <section class="features-section">
+    <div class="content-wrapper">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div *ngFor="let feature of features" class="feature-card">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="tech-section">
+    <div class="content-wrapper">
+      <h2>Technologies Used</h2>
+      <div class="tech-grid">
+        <div *ngFor="let tech of technologies" class="tech-badge">
+          {{ tech }}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Start Writing Today</h2>
+      <p>Share your knowledge and experiences with the community</p>
+      <button class="btn btn-primary" routerLink="/create">Create Your First Blog</button>
+    </div>
+  </section>
+</div>

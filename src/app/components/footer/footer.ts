@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { AppRoutingModule } from '../../app-routing.module';
-
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-footer',
-  imports: [AppRoutingModule],
+  imports: [CommonModule, RouterModule],
+  standalone: true,
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })

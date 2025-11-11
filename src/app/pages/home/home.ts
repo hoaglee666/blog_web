@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BlogService, Blog } from '../../services/blog';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterModule, CommonModule],
+  standalone: true,
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
